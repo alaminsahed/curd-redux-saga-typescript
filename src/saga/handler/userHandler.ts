@@ -16,9 +16,15 @@ import {
   deleteUserError,
   updateUserSuccess,
   updateUserError,
+  searchUserSuccess,
 } from "../../redux/action";
 import { loadUserApi } from "../request/api";
-import { AddUserApi, DeleteUserApi, UpdateUserApi } from "../request/api";
+import {
+  AddUserApi,
+  DeleteUserApi,
+  UpdateUserApi,
+  SearchUserApi,
+} from "../request/api";
 
 type userResType = [];
 export function* userSaga() {
@@ -32,7 +38,7 @@ export function* userSaga() {
 
 export function* addUserSaga({ payload }: any) {
   try {
-    const response: userResType = yield call(AddUserApi, payload);
+    yield call(AddUserApi, payload);
     yield put(createUserSuccess());
   } catch (error) {
     yield put(createUserError(error));
@@ -41,12 +47,10 @@ export function* addUserSaga({ payload }: any) {
 
 export function* deleteUserSaga(id: number) {
   try {
-    const response: userResType | number = yield call(DeleteUserApi, id);
+    yield call(DeleteUserApi, id);
 
-    //if (response.status === 200) {
-    // yield delay(200);
+    yield delay(200);
     yield put(deleteUserSuccess(id));
-    // }
   } catch (error) {
     console.log("e", error);
     yield put(deleteUserError(error));
@@ -57,6 +61,21 @@ export function* updateUserSaga({ payload }: any) {
   try {
     yield call(UpdateUserApi, payload.id, payload);
     yield put(updateUserSuccess());
+  } catch (error) {
+    yield put(updateUserError(error));
+  }
+}
+
+type searchUserType = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+export function* searchUserSaga({ payload: query }: any) {
+  try {
+    const response: searchUserType = yield call(SearchUserApi, query);
+    yield put(searchUserSuccess(response));
   } catch (error) {
     yield put(updateUserError(error));
   }
@@ -79,4 +98,8 @@ export function* deleteUser() {
 
 export function* updateUser() {
   yield takeLatest(types.UpdateUserStart, updateUserSaga);
+}
+
+export function* searchUser() {
+  yield takeEvery(types.SearchUserStart, searchUserSaga);
 }

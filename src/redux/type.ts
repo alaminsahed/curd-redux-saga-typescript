@@ -13,3 +13,7 @@ export const DeleteUserError = "deleteUserError";
 export const UpdateUserStart = "updateUserStart";
 export const UpdateUserSuccess = "updateUserSuccess";
 export const UpdateUserError = "updateUserError";
+
+export const SearchUserStart = "searchUserStart";
+export const SearchUserSuccess = "searchUserSuccess";
+export const SearchUserError = "searchUserError";

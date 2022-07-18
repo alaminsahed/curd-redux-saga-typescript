@@ -23,11 +23,13 @@ const userReducer = (state: IState = initialState, action: IAction) => {
     case types.CreateUserStart:
     case types.DeleteUserStart:
     case types.UpdateUserStart:
+    case types.SearchUserStart:
       return {
         ...state,
         loading: true,
       };
     case types.Success:
+    case types.SearchUserSuccess:
       return {
         ...state,
         users: action.payload,
@@ -48,6 +50,7 @@ const userReducer = (state: IState = initialState, action: IAction) => {
     case types.CreateUserError:
     case types.DeleteUserError:
     case types.UpdateUserError:
+    case types.SearchUserError:
       return {
         ...state,
         loading: false,

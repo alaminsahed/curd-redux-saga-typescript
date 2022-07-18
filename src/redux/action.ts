@@ -1,6 +1,12 @@
 import * as types from "./type";
 
-type user = [];
+type userType = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+//type viewUserType = []
 
 export const loadingStart = () => {
   return {
@@ -8,7 +14,7 @@ export const loadingStart = () => {
   };
 };
 
-export const userSuccess = (user: user) => {
+export const userSuccess = (user: []) => {
   return {
     type: types.Success,
     payload: user,
@@ -79,6 +85,27 @@ export const updateUserSuccess = () => {
 export const updateUserError = (error: any) => {
   return {
     type: types.UpdateUserError,
+    payload: error,
+  };
+};
+
+export const searchUserStart = (query: string) => {
+  return {
+    type: types.SearchUserStart,
+    payload: query,
+  };
+};
+
+export const searchUserSuccess = (user: userType) => {
+  return {
+    type: types.SearchUserSuccess,
+    payload: user,
+  };
+};
+
+export const searchUserError = (error: any) => {
+  return {
+    type: types.SearchUserError,
     payload: error,
   };
 };

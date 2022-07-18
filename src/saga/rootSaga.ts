@@ -4,6 +4,7 @@ import {
   addUser,
   deleteUser,
   updateUser,
+  searchUser,
 } from "./handler/userHandler";
 
 // fork is used to run the function parallel
@@ -12,6 +13,7 @@ const Sagas = [
   fork(addUser),
   fork(deleteUser),
   fork(updateUser),
+  fork(searchUser),
 ];
 
 export function* rootSaga() {
