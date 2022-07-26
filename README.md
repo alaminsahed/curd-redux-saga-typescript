@@ -5,6 +5,7 @@
 * React.js
 * Redux
 * Redux Saga
+* Typescript
 * Json Server
 
 
